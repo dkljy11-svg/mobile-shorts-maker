@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#0f1012">
 <link rel="manifest" href="manifest.webmanifest">
-<title>모바일 쇼츠 메이커 V8</title>
+<title>모바일 쇼츠 메이커 V9.1-1</title>
 <style>
 :root{--bg:#0f1012;--card:#191b1f;--line:#30343c;--text:#fff;--muted:#adb3bd;--green:#bdf5cf}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -40,7 +40,7 @@ video,audio{width:100%;border-radius:14px;margin-top:10px}.progress{height:9px;b
 </style>
 </head>
 <body>
-<header><h1>모바일 쇼츠 메이커 V8 · 소스 검색형</h1></header>
+<header><h1>모바일 쇼츠 메이커 V9.1-1 · 기획 화면</h1></header>
 <main>
 
 <section class="card">
@@ -56,7 +56,58 @@ video,audio{width:100%;border-radius:14px;margin-top:10px}.progress{height:9px;b
 </section>
 
 <section class="card">
-<h2>2. 무료 소스 찾기</h2>
+<h2>2. 기획 자동화 준비</h2>
+<p class="muted">V9.1 첫 단계입니다. 주제·장르·형식을 정하고 기획 결과를 미리 확인할 수 있습니다. 다음 업데이트에서 자동 생성 엔진을 연결합니다.</p>
+
+<div class="grid">
+<div>
+<label>장르</label>
+<select id="plannerGenre">
+<option value="convenience">편의점</option>
+<option value="food">맛집</option>
+<option value="travel">여행</option>
+<option value="product">제품 추천</option>
+<option value="horror">공포·미스터리</option>
+<option value="ranking">랭킹</option>
+<option value="free">자유 주제</option>
+</select>
+</div>
+<div>
+<label>형식</label>
+<select id="plannerFormat">
+<option value="top5">TOP5</option>
+<option value="top3">TOP3</option>
+<option value="review">추천·비추천</option>
+<option value="tips">꿀팁</option>
+<option value="story">스토리형</option>
+</select>
+</div>
+</div>
+
+<label>주제</label>
+<input id="plannerTopic" value="인기 있는 편의점 도시락 TOP5" placeholder="예: 인기 있는 편의점 도시락 TOP5">
+
+<label>톤</label>
+<select id="plannerTone">
+<option value="fast">빠르고 강하게</option>
+<option value="clean">깔끔한 정보형</option>
+<option value="curious">궁금증 유발형</option>
+<option value="calm">차분한 설명형</option>
+</select>
+
+<button id="plannerPreviewBtn" class="good">기획 초안 만들기</button>
+
+<label>기획 초안</label>
+<textarea id="plannerOutput" placeholder="여기에 기획 초안이 표시됩니다."></textarea>
+
+<div class="actions">
+<button id="applyPlannerBtn" class="secondary">기존 입력칸에 반영</button>
+<button id="clearPlannerBtn" class="secondary">초안 지우기</button>
+</div>
+</section>
+
+<section class="card">
+<h2>3. 무료 소스 찾기</h2>
 <p class="muted">주제를 입력하면 한국어·영어·일본어 검색어를 만듭니다. 버튼을 누르면 새 탭에서 검색 결과가 열립니다.</p>
 <label>찾을 주제</label>
 <input id="sourceTopic" value="후쿠오카 맛집 TOP5" placeholder="예: 후쿠오카 맛집 TOP5">
@@ -88,7 +139,7 @@ video,audio{width:100%;border-radius:14px;margin-top:10px}.progress{height:9px;b
 </section>
 
 <section class="card">
-<h2>3. 사진과 컷 구성</h2>
+<h2>4. 사진과 컷 구성</h2>
 <span class="pill">1080×1920</span><span class="pill">30fps</span><span class="pill">API 없음</span>
 <div class="actions"><button id="clearBtn" class="danger">초기화</button><button id="saveProject" class="secondary">프로젝트 저장</button></div>
 <label>사진 1~10장</label><input id="images" type="file" accept="image/*" multiple>
@@ -99,11 +150,11 @@ video,audio{width:100%;border-radius:14px;margin-top:10px}.progress{height:9px;b
 멘타이주
 야타이
 스시</textarea>
-<button id="autoBtn" class="good">V8 대본 자동 구성</button>
+<button id="autoBtn" class="good">기존 템플릿 대본 생성</button>
 </section>
 
 <section class="card">
-<h2>4. 업로드 정보</h2>
+<h2>5. 업로드 정보</h2>
 <label>전체 대본</label><textarea id="script">후쿠오카 맛집 TOP5
 5위 하카타 라멘
 4위 모츠나베
@@ -118,7 +169,7 @@ video,audio{width:100%;border-radius:14px;margin-top:10px}.progress{height:9px;b
 </section>
 
 <section class="card">
-<h2>5. 영상 디자인</h2>
+<h2>6. 영상 디자인</h2>
 <div class="grid">
 <div><label>길이</label><select id="duration"><option value="15">15초</option><option value="20" selected>20초</option><option value="30">30초</option><option value="45">45초</option></select></div>
 <div><label>컷 효과</label><select id="motionMode"><option value="auto" selected>자동 랜덤</option><option value="zoomIn">줌인</option><option value="zoomOut">줌아웃</option><option value="pan">좌우 이동</option></select></div>
@@ -141,13 +192,13 @@ video,audio{width:100%;border-radius:14px;margin-top:10px}.progress{height:9px;b
 </section>
 
 <section class="card">
-<h2>6. 미리보기·썸네일</h2>
+<h2>7. 미리보기·썸네일</h2>
 <div class="preview"><canvas id="canvas" width="1080" height="1920"></canvas></div>
 <div class="actions" style="margin-top:10px"><button id="previewBtn" class="secondary">미리보기</button><button id="thumbnailBtn" class="secondary">썸네일 저장</button></div>
 </section>
 
 <section class="card sticky">
-<button id="renderBtn" class="primary">V8 쇼츠 만들기</button>
+<button id="renderBtn" class="primary">V9.1-1 쇼츠 만들기</button>
 <div class="progress"><div id="bar" class="bar"></div></div>
 <div id="status" class="status muted">사진을 선택하세요.</div>
 <video id="result" controls playsinline></video>
@@ -224,6 +275,57 @@ function renderThumbs(){
  });drawFrame(0,+$("duration").value)
 }
 
+
+const plannerTemplates={
+ convenience:{
+  top5:["편의점에서 인기 있는 {topic}를 정리했습니다.","5위 후보","4위 후보","3위 후보","2위 후보","1위 후보","여러분의 최애는 무엇인가요?"],
+  top3:["편의점에서 꼭 확인할 {topic} TOP3","3위 후보","2위 후보","1위 후보","여러분의 선택은 무엇인가요?"],
+  review:["{topic}, 추천할까요?","좋았던 점","아쉬운 점","추천 대상","여러분의 평가는 어떤가요?"]
+ },
+ food:{
+  top5:["지금 저장해야 할 {topic} TOP5","5위 후보","4위 후보","3위 후보","2위 후보","1위 후보","여러분의 1위는 어디인가요?"]
+ },
+ travel:{
+  top5:["여행 전에 꼭 봐야 할 {topic} TOP5","5위 후보","4위 후보","3위 후보","2위 후보","1위 후보","가장 가보고 싶은 곳은 어디인가요?"]
+ },
+ product:{
+  review:["{topic}, 사도 될까요?","핵심 장점","아쉬운 점","추천 대상","제품 정보는 고정댓글에서 확인하세요"]
+ },
+ horror:{
+  story:["이 이야기를 알고 있나요?","첫 번째 단서","두 번째 단서","마지막 목격담","여러분은 어떻게 생각하나요?"]
+ },
+ ranking:{
+  top5:["오늘의 {topic} 랭킹 TOP5","5위 후보","4위 후보","3위 후보","2위 후보","1위 후보","여러분의 1위는 무엇인가요?"]
+ },
+ free:{
+  tips:["{topic} 핵심만 정리합니다.","핵심 포인트 1","핵심 포인트 2","핵심 포인트 3","저장하고 다음 영상도 확인하세요"]
+ }
+};
+function buildPlannerDraft(){
+ const genre=$("plannerGenre").value,format=$("plannerFormat").value,topic=$("plannerTopic").value.trim()||"오늘의 주제";
+ const group=plannerTemplates[genre]||plannerTemplates.free;
+ const arr=group[format]||group.top5||group.review||group.tips||Object.values(group)[0];
+ return arr.map(x=>x.replaceAll("{topic}",topic)).join("\n");
+}
+$("plannerPreviewBtn").onclick=()=>{$("plannerOutput").value=buildPlannerDraft()};
+$("clearPlannerBtn").onclick=()=>{$("plannerOutput").value=""};
+$("applyPlannerBtn").onclick=()=>{
+ const topic=$("plannerTopic").value.trim()||"오늘의 주제";
+ const draft=$("plannerOutput").value.trim()||buildPlannerDraft();
+ $("product").value=topic;
+ $("title").value=topic;
+ $("script").value=draft;
+ $("description").value=`${topic}의 핵심 내용을 짧게 정리했습니다.`;
+ const compact=topic.replace(/\s/g,"");
+ $("hashtags").value=`#${compact} #추천 #TOP5 #쇼츠`;
+ $("sourceTopic").value=topic;
+ const k=makeSourceKeywords(topic);
+ $("keywordEn").value=k.en;
+ $("keywordJa").value=k.ja;
+ renderKeywordChips();
+ alert("기획 초안을 기존 입력칸에 반영했습니다.");
+};
+
 const sourceDictionary={
  "후쿠오카":["Fukuoka","福岡"],"도쿄":["Tokyo","東京"],"오사카":["Osaka","大阪"],"교토":["Kyoto","京都"],
  "부산":["Busan","釜山"],"서울":["Seoul","ソウル"],"제주":["Jeju","済州"],
@@ -289,7 +391,7 @@ function bestMime(){return ["video/mp4;codecs=h264,aac","video/mp4","video/webm;
 $("renderBtn").onclick=async()=>{
  if(!items.length)return alert("사진을 먼저 선택하세요.");
  if(!window.MediaRecorder||!canvas.captureStream){$("status").textContent="현재 브라우저에서 영상 저장을 지원하지 않습니다. 안드로이드 Chrome 또는 PC Chrome에서 열어주세요.";return}
- $("bar").style.width="0%";$("status").textContent="V8 영상 생성 중… 화면을 끄지 마세요.";$("afterActions").style.display="none";
+ $("bar").style.width="0%";$("status").textContent="V9.1-1 영상 생성 중… 화면을 끄지 마세요.";$("afterActions").style.display="none";
  const d=+$("duration").value,stream=canvas.captureStream(30);let audio=null,aCtx=null;
  if(audioURL){audio=new Audio(audioURL);aCtx=new (window.AudioContext||window.webkitAudioContext)();const src=aCtx.createMediaElementSource(audio),gain=aCtx.createGain(),dest=aCtx.createMediaStreamDestination();gain.gain.value=+$("audioVolume").value/100;src.connect(gain);gain.connect(dest);gain.connect(aCtx.destination);dest.stream.getAudioTracks().forEach(t=>stream.addTrack(t))}
  const mime=bestMime();let rec;try{rec=new MediaRecorder(stream,mime?{mimeType:mime,videoBitsPerSecond:+$("quality").value}:undefined)}catch(e){rec=new MediaRecorder(stream)}
@@ -297,12 +399,12 @@ $("renderBtn").onclick=async()=>{
  if(audio){await aCtx.resume();audio.currentTime=0;audio.play().catch(()=>{})}
  const start=performance.now();await new Promise(resolve=>{function tick(now){const t=(now-start)/1000;drawFrame(Math.min(t,d-.001),d);$("bar").style.width=`${Math.min(100,t/d*100)}%`;if(t<d)requestAnimationFrame(tick);else resolve()}requestAnimationFrame(tick)});
  rec.stop();if(audio)audio.pause();await done;lastType=rec.mimeType||mime||"video/webm";lastBlob=new Blob(chunks,{type:lastType});const url=URL.createObjectURL(lastBlob);
- $("result").src=url;$("download").href=url;$("download").download=lastType.includes("mp4")?"shorts_v8_1080x1920.mp4":"shorts_v8_1080x1920.webm";$("afterActions").style.display="grid";$("bar").style.width="100%";$("status").textContent=`완성 ${(lastBlob.size/1024/1024).toFixed(1)}MB\nV8 · 1080×1920 · 30fps`;if(aCtx)aCtx.close()
+ $("result").src=url;$("download").href=url;$("download").download=lastType.includes("mp4")?"shorts_v8_1080x1920.mp4":"shorts_v8_1080x1920.webm";$("afterActions").style.display="grid";$("bar").style.width="100%";$("status").textContent=`완성 ${(lastBlob.size/1024/1024).toFixed(1)}MB\nV9.1-1 · 1080×1920 · 30fps`;if(aCtx)aCtx.close()
 };
 $("shareBtn").onclick=async()=>{if(!lastBlob)return alert("먼저 영상을 만드세요.");const ext=lastType.includes("mp4")?"mp4":"webm",file=new File([lastBlob],`shorts_v8.${ext}`,{type:lastType});if(navigator.canShare&&navigator.canShare({files:[file]})){try{await navigator.share({files:[file],title:$("title").value,text:$("description").value+"\n\n"+$("hashtags").value})}catch(e){}}else alert("영상 저장 후 YouTube 앱에서 업로드하세요.")};
 $("youtubeBtn").onclick=async()=>{await navigator.clipboard.writeText($("title").value+"\n\n"+$("description").value+"\n\n"+$("hashtags").value);window.open("https://www.youtube.com/upload","_blank")};
-$("saveProject").onclick=()=>{const d={sourceTopic:$("sourceTopic").value,keywordEn:$("keywordEn").value,keywordJa:$("keywordJa").value,template:currentTemplate,product:$("product").value,features:$("features").value,script:$("script").value,title:$("title").value,description:$("description").value,hashtags:$("hashtags").value,duration:$("duration").value,motionMode:$("motionMode").value,transition:$("transition").value,captionAnim:$("captionAnim").value,captionStyle:$("captionStyle").value,themeColor:$("themeColor").value,captionPos:$("captionPos").value,quality:$("quality").value,watermark:$("watermark").value,endCard:$("endCard").checked,introCard:$("introCard").checked,stepDots:$("stepDots").checked,medalBadge:$("medalBadge").checked,pulseOverlay:$("pulseOverlay").checked,ctaText:$("ctaText").value,audioVolume:$("audioVolume").value};localStorage.setItem("mobileShortsV8",JSON.stringify(d));alert("저장했습니다. 사진은 다시 선택해야 합니다.")};
-const saved=localStorage.getItem("mobileShortsV8");if(saved){try{const d=JSON.parse(saved);currentTemplate=d.template||"foodTop5";document.querySelectorAll("[data-template]").forEach(x=>x.classList.toggle("active",x.dataset.template===currentTemplate));Object.entries(d).forEach(([k,v])=>{if($(k)){if($(k).type==="checkbox")$(k).checked=v;else $(k).value=v}});$("volumeOut").value=$("audioVolume").value+"%";renderKeywordChips()}catch(e){}}
+$("saveProject").onclick=()=>{const d={plannerGenre:$("plannerGenre").value,plannerFormat:$("plannerFormat").value,plannerTopic:$("plannerTopic").value,plannerTone:$("plannerTone").value,plannerOutput:$("plannerOutput").value,sourceTopic:$("sourceTopic").value,keywordEn:$("keywordEn").value,keywordJa:$("keywordJa").value,template:currentTemplate,product:$("product").value,features:$("features").value,script:$("script").value,title:$("title").value,description:$("description").value,hashtags:$("hashtags").value,duration:$("duration").value,motionMode:$("motionMode").value,transition:$("transition").value,captionAnim:$("captionAnim").value,captionStyle:$("captionStyle").value,themeColor:$("themeColor").value,captionPos:$("captionPos").value,quality:$("quality").value,watermark:$("watermark").value,endCard:$("endCard").checked,introCard:$("introCard").checked,stepDots:$("stepDots").checked,medalBadge:$("medalBadge").checked,pulseOverlay:$("pulseOverlay").checked,ctaText:$("ctaText").value,audioVolume:$("audioVolume").value};localStorage.setItem("mobileShortsV911",JSON.stringify(d));alert("저장했습니다. 사진은 다시 선택해야 합니다.")};
+const saved=localStorage.getItem("mobileShortsV911");if(saved){try{const d=JSON.parse(saved);currentTemplate=d.template||"foodTop5";document.querySelectorAll("[data-template]").forEach(x=>x.classList.toggle("active",x.dataset.template===currentTemplate));Object.entries(d).forEach(([k,v])=>{if($(k)){if($(k).type==="checkbox")$(k).checked=v;else $(k).value=v}});$("volumeOut").value=$("audioVolume").value+"%";renderKeywordChips()}catch(e){}}
 if("serviceWorker" in navigator)navigator.serviceWorker.register("./sw.js").catch(()=>{});
 drawFrame(0,20);
 </script>
