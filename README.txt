@@ -1,19 +1,28 @@
-모바일 쇼츠 메이커 - API 없음
+모바일 쇼츠 메이커 V2
 
-배포
-1. GitHub에서 새 저장소를 만듭니다. 예: mobile-shorts-maker
-2. 압축을 풀고 index.html, manifest.webmanifest, sw.js, assets 폴더를 전부 업로드합니다.
-3. Settings > Pages
-4. Source: Deploy from a branch
-5. Branch: main / root
-6. Save
-7. 생성된 GitHub Pages 주소를 휴대폰 Safari 또는 Chrome으로 엽니다.
-8. 아이폰: 공유 > 홈 화면에 추가
-9. 안드로이드: 메뉴 > 홈 화면에 추가 또는 앱 설치
+V2 추가 기능
+- 이미지 순서 좌우 변경
+- 이미지 삭제
+- 페이드 전환
+- 마지막 CTA 카드
+- CTA 문구 직접 수정
+- 워터마크
+- 화질 선택
+- 프로젝트 저장
+- 제목/설명/태그 복사
+- 음악 또는 녹음 음성 파일 추가
+- 15/20/25/30초 영상 생성
 
-주의
+업데이트 방법
+1. 기존 mobile-shorts-maker GitHub 저장소로 이동합니다.
+2. Add file > Upload files
+3. 이 압축을 풀고 index.html, manifest.webmanifest, sw.js를 업로드합니다.
+4. 같은 이름의 파일을 덮어씁니다.
+5. Commit changes를 누릅니다.
+6. 1~2분 후 기존 주소를 새로고침합니다.
+7. 캐시 때문에 이전 버전이 보이면 브라우저 새로고침 또는 사이트 데이터 삭제 후 다시 접속합니다.
+
+중요
 - API와 결제는 필요 없습니다.
-- 안드로이드 Chrome은 영상 생성/저장이 비교적 안정적입니다.
-- 아이폰 Safari는 기기와 iOS 버전에 따라 canvas.captureStream/MediaRecorder가 제한되어 영상 저장이 안 될 수 있습니다.
-- 영상 저장이 안 되면 같은 주소를 PC Chrome 또는 안드로이드 Chrome에서 열면 됩니다.
-- 상품 이미지 사용 권한과 쿠팡파트너스 고지 문구를 확인하세요.
+- 안드로이드 Chrome과 PC Chrome에서 영상 저장이 가장 안정적입니다.
+- 아이폰 Safari는 기기/iOS 버전에 따라 영상 생성이 제한될 수 있습니다.
