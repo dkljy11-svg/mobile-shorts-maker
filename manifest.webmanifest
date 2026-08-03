@@ -1,6 +1,6 @@
 {
-  "name": "모바일 쇼츠 메이커 V3",
-  "short_name": "쇼츠메이커V3",
+  "name": "모바일 쇼츠 메이커 V5",
+  "short_name": "쇼츠메이커V5",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0f1012",
