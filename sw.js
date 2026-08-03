@@ -1,3 +1,3 @@
-const C="mobile-shorts-v2";const F=["./","./index.html","./manifest.webmanifest"];
+const C="mobile-shorts-v3";const F=["./","./index.html","./manifest.webmanifest"];
 self.addEventListener("install",e=>e.waitUntil(caches.open(C).then(c=>c.addAll(F))));
 self.addEventListener("fetch",e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request))));

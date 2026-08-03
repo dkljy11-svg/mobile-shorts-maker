@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#0f1012">
 <link rel="manifest" href="manifest.webmanifest">
-<title>모바일 쇼츠 메이커 V2</title>
+<title>모바일 쇼츠 메이커 V3</title>
 <style>
 :root{--bg:#0f1012;--card:#191b1f;--line:#30343c;--text:#fff;--muted:#adb3bd;--green:#bdf5cf}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
-header{position:sticky;top:0;z-index:20;padding:14px 16px;background:rgba(15,16,18,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-h1{font-size:19px;margin:0}h2{font-size:17px;margin:0 0 12px}h3{font-size:15px;margin:14px 0 8px}
-main{max-width:760px;margin:auto;padding:14px 12px 110px}
+header{position:sticky;top:0;z-index:20;padding:14px 16px;background:rgba(15,16,18,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+h1{font-size:19px;margin:0}h2{font-size:17px;margin:0 0 12px}
+main{max-width:780px;margin:auto;padding:14px 12px 110px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;margin-bottom:12px}
 label{display:block;font-weight:760;margin:11px 0 7px}
 input,textarea,select,button{width:100%;font:inherit}
@@ -22,68 +22,54 @@ button{border:0;border-radius:14px;padding:13px;font-weight:850;cursor:pointer}
 .primary{background:#fff;color:#111}.secondary{background:#2a2d34;color:#fff}.good{background:#193125;color:var(--green)}.danger{background:#3a2328;color:#ffc1ca}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}
 .muted{color:var(--muted);font-size:13px;line-height:1.5}.pill{display:inline-block;border:1px solid #3a3f48;border-radius:999px;padding:5px 9px;font-size:12px;color:#d2d5dc;margin:0 5px 5px 0}
-.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px}.thumb{position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;background:#111;border:1px solid #2d3138}
-.thumb img{width:100%;height:100%;object-fit:cover}.thumb .tools{position:absolute;left:4px;right:4px;bottom:4px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px}
-.thumb button{padding:7px 0;border-radius:8px;background:rgba(0,0,0,.75);color:#fff}
+.thumbs{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px}.thumb{position:relative;border-radius:14px;overflow:hidden;background:#111;border:1px solid #2d3138;padding-bottom:8px}
+.thumb img{width:100%;aspect-ratio:1;object-fit:cover}.thumb textarea{min-height:70px;margin:6px;width:calc(100% - 12px);font-size:12px}.thumb .tools{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;padding:0 6px}
+.thumb button{padding:8px 0;border-radius:8px;background:#25282e;color:#fff}
 .preview{display:flex;justify-content:center}canvas{width:min(100%,340px);aspect-ratio:9/16;background:#000;border-radius:18px;border:1px solid #333}
 video,audio{width:100%;border-radius:14px;margin-top:10px}.progress{height:9px;background:#2a2e35;border-radius:999px;overflow:hidden;margin-top:10px}.bar{height:100%;background:#fff;width:0}
 .status{white-space:pre-wrap;background:#111318;border:1px solid #30343c;border-radius:12px;padding:12px;min-height:46px;margin-top:10px}
-.output{white-space:pre-wrap;background:#111318;border:1px solid #30343c;border-radius:12px;padding:12px;line-height:1.55}
 .sticky{position:sticky;bottom:10px;z-index:15;box-shadow:0 10px 35px rgba(0,0,0,.35)}
 .switchrow{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:10px 0}.switchrow input{width:auto;transform:scale(1.3)}
-@media(max-width:460px){.grid,.actions{grid-template-columns:1fr}}
+@media(max-width:460px){.grid,.actions{grid-template-columns:1fr}.thumbs{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<header><h1>모바일 쇼츠 메이커 V2</h1></header>
+<header><h1>모바일 쇼츠 메이커 V3 · 1080×1920</h1></header>
 <main>
 
 <section class="card">
-<h2>1. 사진과 제품 정보</h2>
-<span class="pill">API 없음</span><span class="pill">모바일용</span><span class="pill">유튜브 업로드 가능</span>
+<h2>1. 사진과 컷별 자막</h2>
+<span class="pill">9:16</span><span class="pill">1080×1920</span><span class="pill">API 없음</span>
 <div class="actions">
-<button id="sampleBtn" class="good">샘플 불러오기</button>
 <button id="clearBtn" class="danger">초기화</button>
+<button id="saveProject" class="secondary">프로젝트 저장</button>
 </div>
-
 <label>제품 사진 1~10장</label>
 <input id="images" type="file" accept="image/*" multiple>
 <div id="thumbs" class="thumbs"></div>
-
 <label>제품명</label>
-<input id="product" value="오징어 캐릭터 휴대폰 거치대">
-
-<label>제품 특징</label>
-<textarea id="features">휴대폰을 올려둘 수 있음
-책상 위 인테리어 소품으로 활용 가능
-캐릭터 디자인</textarea>
-
-<div class="actions">
-<button id="autoBtn" class="secondary">대본·제목 자동 생성</button>
-<button id="saveProject" class="secondary">프로젝트 저장</button>
-</div>
+<input id="product" placeholder="예: 폼롤러">
+<label>공통 특징</label>
+<textarea id="features" placeholder="한 줄에 하나씩 입력"></textarea>
+<button id="autoBtn" class="good">대본·제목 자동 생성</button>
 </section>
 
 <section class="card">
 <h2>2. 대본과 업로드 정보</h2>
-<label>영상 대본</label>
+<label>전체 대본</label>
 <textarea id="script">이거 뭐지?
-책상 위에 두면 시선이 갑니다.
-휴대폰을 올려두기 편하고,
-인테리어 소품으로도 활용할 수 있어요.
+생각보다 활용도가 높습니다.
+사용하기 간편하고,
+일상에서 실용적으로 쓸 수 있어요.
 제품 정보는 고정댓글에서 확인하세요.</textarea>
-
 <label>유튜브 제목</label>
-<input id="title" value="책상 위 시선 강탈 오징어 거치대">
-
+<input id="title" value="생각보다 활용도 높은 제품">
 <label>설명</label>
-<textarea id="description">책상 위에 두기 좋은 캐릭터 휴대폰 거치대를 소개합니다.
+<textarea id="description">제품 특징을 짧게 정리했습니다.
 
 ※ 본 콘텐츠에는 제휴 링크가 포함될 수 있으며, 구매 시 일정 수수료를 받을 수 있습니다.</textarea>
-
 <label>해시태그</label>
-<input id="hashtags" value="#휴대폰거치대 #캐릭터소품 #책상꾸미기 #쿠팡파트너스 #쇼츠">
-
+<input id="hashtags" value="#제품추천 #생활꿀템 #쿠팡파트너스 #쇼츠">
 <div class="actions">
 <button id="copyTitle" class="secondary">제목 복사</button>
 <button id="copyMeta" class="secondary">설명+태그 복사</button>
@@ -91,25 +77,19 @@ video,audio{width:100%;border-radius:14px;margin-top:10px}.progress{height:9px;b
 </section>
 
 <section class="card">
-<h2>3. 영상 설정</h2>
+<h2>3. 영상 디자인</h2>
 <div class="grid">
 <div><label>길이</label><select id="duration"><option value="15">15초</option><option value="20" selected>20초</option><option value="25">25초</option><option value="30">30초</option></select></div>
-<div><label>스타일</label><select id="style"><option value="dynamic">빠른 광고형</option><option value="clean" selected>정보형</option><option value="calm">감성형</option></select></div>
+<div><label>줌 효과</label><select id="zoom"><option value="dynamic">강하게</option><option value="normal" selected>보통</option><option value="calm">약하게</option></select></div>
+<div><label>전환</label><select id="transition"><option value="fade" selected>페이드</option><option value="flash">플래시</option><option value="none">없음</option></select></div>
+<div><label>자막 스타일</label><select id="captionStyle"><option value="bold" selected>굵은 흰색</option><option value="yellow">노란 강조형</option><option value="box">검정 박스형</option></select></div>
 <div><label>자막 위치</label><select id="captionPos"><option value="top">위</option><option value="center">가운데</option><option value="bottom" selected>아래</option></select></div>
-<div><label>전환 효과</label><select id="transition"><option value="fade" selected>페이드</option><option value="none">없음</option></select></div>
-<div><label>워터마크</label><input id="watermark" placeholder="@채널명"></div>
 <div><label>화질</label><select id="quality"><option value="5000000">표준</option><option value="8000000" selected>고화질</option><option value="11000000">최고화질</option></select></div>
 </div>
-
-<div class="switchrow">
-<label for="endCard" style="margin:0">마지막 CTA 카드 넣기</label>
-<input id="endCard" type="checkbox" checked>
-</div>
-<label>마지막 CTA 문구</label>
-<input id="ctaText" value="제품 정보는 고정댓글에서 확인하세요">
-
-<label>음악 또는 녹음한 음성 파일(선택)</label>
-<input id="audio" type="file" accept="audio/*">
+<label>워터마크</label><input id="watermark" placeholder="@채널명">
+<div class="switchrow"><label for="endCard" style="margin:0">마지막 CTA 카드</label><input id="endCard" type="checkbox" checked></div>
+<label>CTA 문구</label><input id="ctaText" value="제품 정보는 고정댓글에서 확인하세요">
+<label>음악 또는 음성 파일</label><input id="audio" type="file" accept="audio/*">
 </section>
 
 <section class="card">
@@ -122,9 +102,9 @@ video,audio{width:100%;border-radius:14px;margin-top:10px}.progress{height:9px;b
 </section>
 
 <section class="card sticky">
-<button id="renderBtn" class="primary">쇼츠 영상 만들기</button>
+<button id="renderBtn" class="primary">1080×1920 쇼츠 만들기</button>
 <div class="progress"><div id="bar" class="bar"></div></div>
-<div id="status" class="status muted">샘플을 불러오거나 사진을 선택하세요.</div>
+<div id="status" class="status muted">사진을 선택하세요.</div>
 <video id="result" controls playsinline></video>
 <a id="download" style="display:none;margin-top:10px"><button class="primary">완성 영상 저장</button></a>
 </section>
@@ -134,174 +114,74 @@ video,audio{width:100%;border-radius:14px;margin-top:10px}.progress{height:9px;b
 const $=id=>document.getElementById(id);
 const canvas=$("canvas"),ctx=canvas.getContext("2d");
 let items=[],audioURL=null,raf=null,playing=false;
-
 function lines(v){return v.split(/\n+/).map(x=>x.trim()).filter(Boolean)}
-function fitCover(img,z=1,px=0,py=0){
- const s=Math.max(1080/img.width,1920/img.height)*z,w=img.width*s,h=img.height*s;
- ctx.drawImage(img,(1080-w)/2+px*Math.max(0,w-1080)/2,(1920-h)/2+py*Math.max(0,h-1920)/2,w,h);
-}
-function wrapText(text,max=900,size=60){
- ctx.font=`800 ${size}px sans-serif`;const out=[];let line="";
- for(const ch of [...text]){const test=line+ch;if(line&&ctx.measureText(test).width>max){out.push(line);line=ch}else line=test}
- if(line)out.push(line);return out.slice(0,3)
-}
+function fitCover(img,z=1,px=0,py=0){const s=Math.max(1080/img.width,1920/img.height)*z,w=img.width*s,h=img.height*s;ctx.drawImage(img,(1080-w)/2+px*Math.max(0,w-1080)/2,(1920-h)/2+py*Math.max(0,h-1920)/2,w,h)}
+function wrapText(text,max=900,size=60){ctx.font=`800 ${size}px sans-serif`;const out=[];let line="";for(const ch of [...text]){const test=line+ch;if(line&&ctx.measureText(test).width>max){out.push(line);line=ch}else line=test}if(line)out.push(line);return out.slice(0,3)}
 function drawCaption(text){
- const size=60,ls=wrapText(text,900,size),lh=82,total=ls.length*lh,pos=$("captionPos").value;
+ const style=$("captionStyle").value,size=60,ls=wrapText(text,900,size),lh=82,total=ls.length*lh,pos=$("captionPos").value;
  let y=pos==="top"?250:pos==="center"?(1920-total)/2:1920-330-total;
  ctx.font=`800 ${size}px sans-serif`;ctx.textAlign="center";ctx.textBaseline="top";
- for(const l of ls){ctx.lineWidth=15;ctx.strokeStyle="rgba(0,0,0,.92)";ctx.strokeText(l,540,y);ctx.fillStyle="#fff";ctx.fillText(l,540,y);y+=lh}
+ for(const l of ls){
+  if(style==="box"){const w=ctx.measureText(l).width+50;ctx.fillStyle="rgba(0,0,0,.78)";ctx.fillRect(540-w/2,y-8,w,76)}
+  ctx.lineWidth=15;ctx.strokeStyle="rgba(0,0,0,.92)";ctx.strokeText(l,540,y);
+  ctx.fillStyle=style==="yellow"?"#ffe600":"#fff";ctx.fillText(l,540,y);y+=lh
+ }
 }
-function drawEndCard(text){
- ctx.fillStyle="rgba(0,0,0,.72)";ctx.fillRect(0,0,1080,1920);
- ctx.fillStyle="#fff";ctx.textAlign="center";ctx.textBaseline="middle";
- ctx.font="900 72px sans-serif";
- const ls=wrapText(text,850,72),lh=100;
- let y=960-(ls.length-1)*lh/2;
- for(const l of ls){ctx.fillText(l,540,y);y+=lh}
- ctx.font="700 38px sans-serif";ctx.fillStyle="rgba(255,255,255,.8)";ctx.fillText("고정댓글 확인",540,1250);
-}
+function drawEndCard(text){ctx.fillStyle="rgba(0,0,0,.78)";ctx.fillRect(0,0,1080,1920);ctx.fillStyle="#fff";ctx.textAlign="center";ctx.textBaseline="middle";ctx.font="900 72px sans-serif";const ls=wrapText(text,850,72),lh=100;let y=930-(ls.length-1)*lh/2;for(const l of ls){ctx.fillText(l,540,y);y+=lh}ctx.font="700 38px sans-serif";ctx.fillStyle="rgba(255,255,255,.75)";ctx.fillText("고정댓글 확인",540,1260)}
 function drawFrame(t,d){
  ctx.fillStyle="#000";ctx.fillRect(0,0,1080,1920);
  if(!items.length){ctx.fillStyle="#fff";ctx.font="700 58px sans-serif";ctx.textAlign="center";ctx.fillText("사진을 선택하세요",540,960);return}
-
- const endCardSec=$("endCard").checked?Math.min(2.5,d*.15):0;
- const visualDuration=d-endCardSec;
- if(endCardSec>0 && t>=visualDuration){drawEndCard($("ctaText").value||"고정댓글을 확인하세요");return}
-
- const seg=visualDuration/items.length,idx=Math.min(items.length-1,Math.floor(t/seg)),local=(t-idx*seg)/seg,style=$("style").value;
- let z=1.04,px=0,py=0;
- if(style==="dynamic"){z=1.05+local*.16;px=(idx%2?1:-1)*(local-.5)*.2}
- else if(style==="calm"){z=1.02+local*.06;py=(local-.5)*.08}
- else{z=1.04+local*.09;px=(idx%2?1:-1)*(local-.5)*.08}
- fitCover(items[idx].img,z,px,py);
-
- if($("transition").value==="fade"){
-  const edge=Math.min(local,1-local),alpha=Math.max(0,1-edge/.12);
-  if(alpha>0){ctx.fillStyle=`rgba(0,0,0,${alpha*.45})`;ctx.fillRect(0,0,1080,1920)}
- }
-
+ const endSec=$("endCard").checked?Math.min(2.5,d*.15):0,visual=d-endSec;
+ if(endSec&&t>=visual){drawEndCard($("ctaText").value||"고정댓글 확인");return}
+ const seg=visual/items.length,idx=Math.min(items.length-1,Math.floor(t/seg)),local=(t-idx*seg)/seg,it=items[idx],zoom=$("zoom").value;
+ let z=1.03,px=0,py=0;
+ if(zoom==="dynamic"){z=1.05+local*.18;px=(idx%2?1:-1)*(local-.5)*.22}
+ else if(zoom==="calm"){z=1.02+local*.05;py=(local-.5)*.06}
+ else{z=1.04+local*.10;px=(idx%2?1:-1)*(local-.5)*.1}
+ fitCover(it.img,z,px,py);
+ const trans=$("transition").value,edge=Math.min(local,1-local);
+ if(trans==="fade"&&edge<.12){ctx.fillStyle=`rgba(0,0,0,${(1-edge/.12)*.45})`;ctx.fillRect(0,0,1080,1920)}
+ if(trans==="flash"&&local<.06){ctx.fillStyle=`rgba(255,255,255,${(1-local/.06)*.45})`;ctx.fillRect(0,0,1080,1920)}
  const g=ctx.createLinearGradient(0,1100,0,1920);g.addColorStop(0,"rgba(0,0,0,0)");g.addColorStop(1,"rgba(0,0,0,.62)");ctx.fillStyle=g;ctx.fillRect(0,0,1080,1920);
-
- const ls=lines($("script").value),cap=ls[Math.min(ls.length-1,Math.floor(t/(visualDuration/Math.max(1,ls.length))))]||$("product").value;
- drawCaption(cap);
-
- const w=$("watermark").value.trim();
- if(w){ctx.font="700 34px sans-serif";ctx.textAlign="right";ctx.textBaseline="bottom";ctx.fillStyle="rgba(255,255,255,.9)";ctx.fillText(w,1030,1860)}
+ const fallback=lines($("script").value);const cap=(it.caption&&it.caption.trim())||fallback[Math.min(fallback.length-1,idx)]||$("product").value;drawCaption(cap);
+ const w=$("watermark").value.trim();if(w){ctx.font="700 34px sans-serif";ctx.textAlign="right";ctx.textBaseline="bottom";ctx.fillStyle="rgba(255,255,255,.9)";ctx.fillText(w,1030,1860)}
 }
 function renderThumbs(){
  $("thumbs").innerHTML="";
- items.forEach((it,i)=>{
-  const box=document.createElement("div");box.className="thumb";
-  box.innerHTML=`<img src="${it.url}"><div class="tools"><button>←</button><button>×</button><button>→</button></div>`;
+ items.forEach((it,i)=>{const box=document.createElement("div");box.className="thumb";box.innerHTML=`<img src="${it.url}"><textarea placeholder="이 컷 자막">${it.caption||""}</textarea><div class="tools"><button>←</button><button>×</button><button>→</button></div>`;
+  const ta=box.querySelector("textarea");ta.oninput=e=>{it.caption=e.target.value};
   const [left,del,right]=box.querySelectorAll("button");
   left.onclick=()=>{if(i>0){[items[i-1],items[i]]=[items[i],items[i-1]];renderThumbs()}};
   del.onclick=()=>{items.splice(i,1);renderThumbs()};
   right.onclick=()=>{if(i<items.length-1){[items[i+1],items[i]]=[items[i],items[i+1]];renderThumbs()}};
   $("thumbs").appendChild(box)
- });
- drawFrame(0,+$("duration").value);
+ });drawFrame(0,+$("duration").value)
 }
-async function setUrls(urls){
- items=[];
- for(const url of urls){const img=new Image();await new Promise((r,j)=>{img.onload=r;img.onerror=j;img.src=url});items.push({url,img})}
- renderThumbs();
-}
-$("sampleBtn").onclick=()=>setUrls(["assets/sample1.jpeg","assets/sample2.jpeg","assets/sample3.jpeg"]);
+$("images").onchange=async e=>{const arr=[];for(const f of [...e.target.files].slice(0,10)){const url=URL.createObjectURL(f),img=new Image();await new Promise((r,j)=>{img.onload=r;img.onerror=j;img.src=url});arr.push({url,img,file:f,caption:""})}items=arr;renderThumbs()};
 $("clearBtn").onclick=()=>{items=[];renderThumbs()};
-$("images").onchange=async e=>{
- const arr=[];
- for(const f of [...e.target.files].slice(0,10)){
-  const url=URL.createObjectURL(f),img=new Image();
-  await new Promise((r,j)=>{img.onload=r;img.onerror=j;img.src=url});
-  arr.push({url,img,file:f})
- }
- items=arr;renderThumbs();
-};
-$("audio").onchange=e=>{
- if(audioURL)URL.revokeObjectURL(audioURL);
- audioURL=e.target.files[0]?URL.createObjectURL(e.target.files[0]):null
-};
-
-$("autoBtn").onclick=()=>{
- const p=$("product").value.trim()||"이 제품",fs=lines($("features").value),f1=fs[0]||"간편하게 사용할 수 있음",f2=fs[1]||"보관이 편리함",f3=fs[2]||"일상에서 활용 가능함";
- $("script").value=`이거 뭐지?\n${p}, 생각보다 활용도가 높습니다.\n${f1}.\n${f2}.\n${f3}.\n제품 정보는 고정댓글에서 확인하세요.`;
- $("title").value=`생각보다 활용도 높은 ${p}`;
- $("description").value=`${p}의 특징을 짧게 정리했습니다.\n\n※ 본 콘텐츠에는 제휴 링크가 포함될 수 있으며, 구매 시 일정 수수료를 받을 수 있습니다.`;
- $("hashtags").value=`#${p.replace(/\s/g,"")} #제품추천 #생활꿀템 #쿠팡파트너스 #쇼츠`;
- drawFrame(0,+$("duration").value);
-};
-
+$("audio").onchange=e=>{if(audioURL)URL.revokeObjectURL(audioURL);audioURL=e.target.files[0]?URL.createObjectURL(e.target.files[0]):null};
+$("autoBtn").onclick=()=>{const p=$("product").value.trim()||"이 제품",fs=lines($("features").value),f1=fs[0]||"간편하게 사용 가능",f2=fs[1]||"보관이 편리",f3=fs[2]||"일상에서 활용 가능";$("script").value=`이거 뭐지?\n${p}, 생각보다 활용도가 높습니다.\n${f1}.\n${f2}.\n${f3}.\n제품 정보는 고정댓글에서 확인하세요.`;$("title").value=`생각보다 활용도 높은 ${p}`;$("description").value=`${p}의 특징을 짧게 정리했습니다.\n\n※ 본 콘텐츠에는 제휴 링크가 포함될 수 있으며, 구매 시 일정 수수료를 받을 수 있습니다.`;$("hashtags").value=`#${p.replace(/\s/g,"")} #제품추천 #생활꿀템 #쿠팡파트너스 #쇼츠`;items.forEach((it,i)=>it.caption=lines($("script").value)[i]||"");renderThumbs()};
 $("copyTitle").onclick=async()=>{await navigator.clipboard.writeText($("title").value);alert("제목 복사 완료")};
 $("copyMeta").onclick=async()=>{await navigator.clipboard.writeText($("description").value+"\n\n"+$("hashtags").value);alert("설명과 태그 복사 완료")};
-
-$("previewBtn").onclick=()=>{
- if(!items.length)return alert("사진을 먼저 선택하세요.");
- playing=false;if(raf)cancelAnimationFrame(raf);playing=true;
- const d=+$("duration").value,s=performance.now();
- const tick=n=>{if(!playing)return;const t=(n-s)/1000;drawFrame(Math.min(t,d-.001),d);if(t<d)raf=requestAnimationFrame(tick)};
- raf=requestAnimationFrame(tick);
-};
-$("speakBtn").onclick=()=>{
- speechSynthesis.cancel();
- const u=new SpeechSynthesisUtterance($("script").value);
- u.lang="ko-KR";u.rate=1.05;speechSynthesis.speak(u)
-};
-["duration","style","captionPos","transition","watermark","script","ctaText","endCard"].forEach(id=>$(id).addEventListener("input",()=>drawFrame(0,+$("duration").value)));
-
-function bestMime(){
- return ["video/mp4;codecs=h264,aac","video/mp4","video/webm;codecs=vp9,opus","video/webm;codecs=vp8,opus","video/webm"].find(x=>window.MediaRecorder&&MediaRecorder.isTypeSupported(x))||""
-}
+$("previewBtn").onclick=()=>{if(!items.length)return alert("사진을 먼저 선택하세요.");playing=false;if(raf)cancelAnimationFrame(raf);playing=true;const d=+$("duration").value,s=performance.now();const tick=n=>{if(!playing)return;const t=(n-s)/1000;drawFrame(Math.min(t,d-.001),d);if(t<d)raf=requestAnimationFrame(tick)};raf=requestAnimationFrame(tick)};
+$("speakBtn").onclick=()=>{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance($("script").value);u.lang="ko-KR";u.rate=1.05;speechSynthesis.speak(u)};
+["duration","zoom","transition","captionStyle","captionPos","watermark","script","ctaText","endCard"].forEach(id=>$(id).addEventListener("input",()=>drawFrame(0,+$("duration").value)));
+function bestMime(){return ["video/mp4;codecs=h264,aac","video/mp4","video/webm;codecs=vp9,opus","video/webm;codecs=vp8,opus","video/webm"].find(x=>window.MediaRecorder&&MediaRecorder.isTypeSupported(x))||""}
 $("renderBtn").onclick=async()=>{
  if(!items.length)return alert("사진을 먼저 선택하세요.");
- if(!window.MediaRecorder||!canvas.captureStream){
-  $("status").textContent="현재 브라우저에서 영상 저장 기능을 지원하지 않습니다. 안드로이드 Chrome 또는 PC Chrome에서 같은 주소를 열어주세요.";
-  return
- }
- $("bar").style.width="0%";$("status").textContent="영상 만드는 중… 화면을 끄지 마세요.";
- const d=+$("duration").value,stream=canvas.captureStream(30);
- let audio=null,aCtx=null;
- if(audioURL){
-  audio=new Audio(audioURL);
-  aCtx=new (window.AudioContext||window.webkitAudioContext)();
-  const src=aCtx.createMediaElementSource(audio),dest=aCtx.createMediaStreamDestination();
-  src.connect(dest);src.connect(aCtx.destination);dest.stream.getAudioTracks().forEach(t=>stream.addTrack(t))
- }
- const mime=bestMime();let rec;
- try{rec=new MediaRecorder(stream,mime?{mimeType:mime,videoBitsPerSecond:+$("quality").value}:undefined)}
- catch(e){rec=new MediaRecorder(stream)}
- const chunks=[];
- rec.ondataavailable=e=>{if(e.data?.size)chunks.push(e.data)};
- const done=new Promise(r=>rec.onstop=r);rec.start(1000);
+ if(!window.MediaRecorder||!canvas.captureStream){$("status").textContent="현재 브라우저에서 영상 저장을 지원하지 않습니다. 안드로이드 Chrome 또는 PC Chrome에서 같은 주소를 열어주세요.";return}
+ $("bar").style.width="0%";$("status").textContent="1080×1920 영상 생성 중… 화면을 끄지 마세요.";
+ const d=+$("duration").value,stream=canvas.captureStream(30);let audio=null,aCtx=null;
+ if(audioURL){audio=new Audio(audioURL);aCtx=new (window.AudioContext||window.webkitAudioContext)();const src=aCtx.createMediaElementSource(audio),dest=aCtx.createMediaStreamDestination();src.connect(dest);src.connect(aCtx.destination);dest.stream.getAudioTracks().forEach(t=>stream.addTrack(t))}
+ const mime=bestMime();let rec;try{rec=new MediaRecorder(stream,mime?{mimeType:mime,videoBitsPerSecond:+$("quality").value}:undefined)}catch(e){rec=new MediaRecorder(stream)}
+ const chunks=[];rec.ondataavailable=e=>{if(e.data?.size)chunks.push(e.data)};const done=new Promise(r=>rec.onstop=r);rec.start(1000);
  if(audio){await aCtx.resume();audio.currentTime=0;audio.play().catch(()=>{})}
- const start=performance.now();
- await new Promise(resolve=>{
-  function tick(now){
-   const t=(now-start)/1000;drawFrame(Math.min(t,d-.001),d);
-   $("bar").style.width=`${Math.min(100,t/d*100)}%`;
-   if(t<d)requestAnimationFrame(tick);else resolve()
-  }requestAnimationFrame(tick)
- });
- rec.stop();if(audio)audio.pause();await done;
- const type=rec.mimeType||mime||"video/webm",blob=new Blob(chunks,{type}),url=URL.createObjectURL(blob);
- $("result").src=url;$("download").href=url;$("download").download=type.includes("mp4")?"shorts_video.mp4":"shorts_video.webm";$("download").style.display="block";
- $("bar").style.width="100%";$("status").textContent=`완성 ${(blob.size/1024/1024).toFixed(1)}MB\nYouTube Shorts에 업로드할 수 있습니다.`;
- if(aCtx)aCtx.close()
+ const start=performance.now();await new Promise(resolve=>{function tick(now){const t=(now-start)/1000;drawFrame(Math.min(t,d-.001),d);$("bar").style.width=`${Math.min(100,t/d*100)}%`;if(t<d)requestAnimationFrame(tick);else resolve()}requestAnimationFrame(tick)});
+ rec.stop();if(audio)audio.pause();await done;const type=rec.mimeType||mime||"video/webm",blob=new Blob(chunks,{type}),url=URL.createObjectURL(blob);
+ $("result").src=url;$("download").href=url;$("download").download=type.includes("mp4")?"shorts_1080x1920.mp4":"shorts_1080x1920.webm";$("download").style.display="block";$("bar").style.width="100%";$("status").textContent=`완성 ${(blob.size/1024/1024).toFixed(1)}MB\n해상도 1080×1920 · 9:16`;if(aCtx)aCtx.close()
 };
-
-function saveProjectData(){
- const data={product:$("product").value,features:$("features").value,script:$("script").value,title:$("title").value,description:$("description").value,hashtags:$("hashtags").value,duration:$("duration").value,style:$("style").value,captionPos:$("captionPos").value,transition:$("transition").value,watermark:$("watermark").value,endCard:$("endCard").checked,ctaText:$("ctaText").value,quality:$("quality").value};
- localStorage.setItem("mobileShortsV2",JSON.stringify(data));
- alert("프로젝트를 저장했습니다. 사진은 다시 선택해야 합니다.")
-}
-$("saveProject").onclick=saveProjectData;
-
-const saved=localStorage.getItem("mobileShortsV2");
-if(saved){
- try{
-  const d=JSON.parse(saved);
-  Object.entries(d).forEach(([k,v])=>{if($(k)){if($(k).type==="checkbox")$(k).checked=v;else $(k).value=v}});
- }catch(e){}
-}
+$("saveProject").onclick=()=>{const d={product:$("product").value,features:$("features").value,script:$("script").value,title:$("title").value,description:$("description").value,hashtags:$("hashtags").value,duration:$("duration").value,zoom:$("zoom").value,transition:$("transition").value,captionStyle:$("captionStyle").value,captionPos:$("captionPos").value,quality:$("quality").value,watermark:$("watermark").value,endCard:$("endCard").checked,ctaText:$("ctaText").value};localStorage.setItem("mobileShortsV3",JSON.stringify(d));alert("저장했습니다. 사진은 다시 선택해야 합니다.")};
+const saved=localStorage.getItem("mobileShortsV3");if(saved){try{const d=JSON.parse(saved);Object.entries(d).forEach(([k,v])=>{if($(k)){if($(k).type==="checkbox")$(k).checked=v;else $(k).value=v}})}catch(e){}}
 if("serviceWorker" in navigator)navigator.serviceWorker.register("./sw.js").catch(()=>{});
 drawFrame(0,20);
 </script>

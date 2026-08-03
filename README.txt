@@ -1,28 +1,29 @@
-모바일 쇼츠 메이커 V2
+모바일 쇼츠 메이커 V3
 
-V2 추가 기능
-- 이미지 순서 좌우 변경
-- 이미지 삭제
-- 페이드 전환
+해상도
+- 1080 × 1920
+- 세로 9:16
+- YouTube Shorts에 적합한 Full HD 세로 규격
+
+V3 추가 기능
+- 사진별 자막 입력
+- 사진 순서 변경
+- 자동 줌 강도 선택
+- 페이드/플래시 전환
+- 자막 스타일 3종
 - 마지막 CTA 카드
-- CTA 문구 직접 수정
-- 워터마크
-- 화질 선택
+- 음악/음성 파일 추가
+- 고화질 비트레이트 선택
 - 프로젝트 저장
-- 제목/설명/태그 복사
-- 음악 또는 녹음 음성 파일 추가
-- 15/20/25/30초 영상 생성
+- 1080×1920 결과물
 
-업데이트 방법
-1. 기존 mobile-shorts-maker GitHub 저장소로 이동합니다.
-2. Add file > Upload files
-3. 이 압축을 풀고 index.html, manifest.webmanifest, sw.js를 업로드합니다.
-4. 같은 이름의 파일을 덮어씁니다.
-5. Commit changes를 누릅니다.
-6. 1~2분 후 기존 주소를 새로고침합니다.
-7. 캐시 때문에 이전 버전이 보이면 브라우저 새로고침 또는 사이트 데이터 삭제 후 다시 접속합니다.
+업데이트
+1. 기존 mobile-shorts-maker 저장소에서 Add file > Upload files
+2. 압축을 풀고 index.html, manifest.webmanifest, sw.js, README.txt 업로드
+3. Commit changes
+4. 1~2분 후 기존 주소 새로고침
+5. 이전 버전이면 Ctrl+F5 또는 브라우저 캐시 삭제
 
-중요
-- API와 결제는 필요 없습니다.
-- 안드로이드 Chrome과 PC Chrome에서 영상 저장이 가장 안정적입니다.
-- 아이폰 Safari는 기기/iOS 버전에 따라 영상 생성이 제한될 수 있습니다.
+주의
+- 아이폰 Safari는 영상 생성 기능이 제한될 수 있습니다.
+- 안드로이드 Chrome 또는 PC Chrome이 가장 안정적입니다.
