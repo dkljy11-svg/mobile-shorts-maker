@@ -1,25 +1,22 @@
-모바일 쇼츠 메이커 V7
+모바일 쇼츠 메이커 V8
 
-추가 기능
-- 15/20/30/45초 길이
-- 팝업/타이핑/페이드/슬라이드 자막 애니메이션
-- 테마색 5종
-- 비트 펄스 화면 효과
-- 맛집/여행/쇼핑/리뷰/공포/랭킹 템플릿
-- 자동 랜덤 모션
-- 메달·순위 배지
-- 단계 표시
-- 썸네일 PNG
-- 영상 공유와 YouTube 열기
-- 1080×1920, 30fps 출력
+V8 새 기능
+- 주제 기반 영어·일본어 검색 키워드 생성
+- Pexels/Pixabay/Unsplash 무료 사진 검색 바로가기
+- Pexels/Pixabay/Mixkit 무료 영상 검색 바로가기
+- Google 이미지·웹 검색, YouTube 참고 검색
+- 검색 키워드 칩 복사
+- 검색어 프로젝트 저장
+- V7의 템플릿·자막 애니메이션·영상 생성 기능 유지
+
+중요
+- 검색 결과 전체가 자유 이용 가능한 것은 아닙니다.
+- 각 소스 페이지에서 라이선스, 상업적 이용, 출처 표기 조건을 확인하세요.
+- YouTube 검색은 참고용이며 타인의 영상을 내려받아 재사용하면 안 됩니다.
 
 업데이트
 1. 기존 GitHub mobile-shorts-maker 저장소
 2. Add file > Upload files
-3. 압축을 푼 index.html, manifest.webmanifest, sw.js, README.txt 업로드
+3. index.html, manifest.webmanifest, sw.js, README.txt 업로드
 4. Commit changes
-5. 1~2분 뒤 기존 주소 Ctrl+F5
-
-주의
-- 브라우저가 MP4를 지원하지 않으면 WebM으로 저장됩니다.
-- 아이폰 Safari에서는 영상 생성 기능이 제한될 수 있습니다.
+5. 1~2분 뒤 기존 사이트 Ctrl+F5

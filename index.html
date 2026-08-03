@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#0f1012">
 <link rel="manifest" href="manifest.webmanifest">
-<title>모바일 쇼츠 메이커 V7</title>
+<title>모바일 쇼츠 메이커 V8</title>
 <style>
 :root{--bg:#0f1012;--card:#191b1f;--line:#30343c;--text:#fff;--muted:#adb3bd;--green:#bdf5cf}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -32,11 +32,15 @@ video,audio{width:100%;border-radius:14px;margin-top:10px}.progress{height:9px;b
 .sticky{position:sticky;bottom:10px;z-index:15;box-shadow:0 10px 35px rgba(0,0,0,.35)}
 .switchrow{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:10px 0}.switchrow input{width:auto;transform:scale(1.3)}
 .rangeLine{display:grid;grid-template-columns:1fr 70px;gap:10px;align-items:center}.rangeLine input[type=range]{padding:0}.rangeLine output{text-align:center;background:#111318;border:1px solid #383c45;border-radius:10px;padding:9px}
-@media(max-width:480px){.grid,.actions{grid-template-columns:1fr}.templateGrid{grid-template-columns:1fr 1fr}.thumbs{grid-template-columns:1fr}}
+.sourceButtons{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.keywordChips{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}
+.keywordChips button{width:auto;padding:8px 11px;border-radius:999px;background:#25282e;color:#fff;font-size:12px}
+.notice{border-left:4px solid #ffe600;background:#111318;border-radius:10px;padding:11px 12px;margin-top:10px}
+@media(max-width:480px){.grid,.actions{grid-template-columns:1fr}.templateGrid{grid-template-columns:1fr 1fr}.sourceButtons{grid-template-columns:1fr 1fr}.thumbs{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<header><h1>모바일 쇼츠 메이커 V7</h1></header>
+<header><h1>모바일 쇼츠 메이커 V8 · 소스 검색형</h1></header>
 <main>
 
 <section class="card">
@@ -52,7 +56,39 @@ video,audio{width:100%;border-radius:14px;margin-top:10px}.progress{height:9px;b
 </section>
 
 <section class="card">
-<h2>2. 사진과 컷 구성</h2>
+<h2>2. 무료 소스 찾기</h2>
+<p class="muted">주제를 입력하면 한국어·영어·일본어 검색어를 만듭니다. 버튼을 누르면 새 탭에서 검색 결과가 열립니다.</p>
+<label>찾을 주제</label>
+<input id="sourceTopic" value="후쿠오카 맛집 TOP5" placeholder="예: 후쿠오카 맛집 TOP5">
+<button id="keywordBtn" class="good">검색 키워드 만들기</button>
+<div class="grid">
+<div><label>영어 검색어</label><input id="keywordEn" value="Fukuoka food ramen yatai"></div>
+<div><label>일본어 검색어</label><input id="keywordJa" value="福岡 グルメ ラーメン 屋台"></div>
+</div>
+<div id="keywordChips" class="keywordChips"></div>
+<label>무료 사진 검색</label>
+<div class="sourceButtons">
+<button class="secondary sourceLink" data-site="pexelsPhoto">Pexels 사진</button>
+<button class="secondary sourceLink" data-site="pixabayPhoto">Pixabay 사진</button>
+<button class="secondary sourceLink" data-site="unsplash">Unsplash</button>
+</div>
+<label>무료 영상 검색</label>
+<div class="sourceButtons">
+<button class="secondary sourceLink" data-site="pexelsVideo">Pexels 영상</button>
+<button class="secondary sourceLink" data-site="pixabayVideo">Pixabay 영상</button>
+<button class="secondary sourceLink" data-site="mixkit">Mixkit 영상</button>
+</div>
+<label>참고 자료 검색</label>
+<div class="sourceButtons">
+<button class="secondary sourceLink" data-site="googleImages">Google 이미지</button>
+<button class="secondary sourceLink" data-site="youtube">YouTube 참고</button>
+<button class="secondary sourceLink" data-site="googleWeb">Google 검색</button>
+</div>
+<div class="notice muted"><strong>저작권 확인:</strong> 검색 결과가 모두 자유 이용 가능한 것은 아닙니다. 각 사이트의 라이선스와 상업적 이용 가능 여부를 확인하고, 유튜브 영상은 참고용으로만 사용하세요.</div>
+</section>
+
+<section class="card">
+<h2>3. 사진과 컷 구성</h2>
 <span class="pill">1080×1920</span><span class="pill">30fps</span><span class="pill">API 없음</span>
 <div class="actions"><button id="clearBtn" class="danger">초기화</button><button id="saveProject" class="secondary">프로젝트 저장</button></div>
 <label>사진 1~10장</label><input id="images" type="file" accept="image/*" multiple>
@@ -63,11 +99,11 @@ video,audio{width:100%;border-radius:14px;margin-top:10px}.progress{height:9px;b
 멘타이주
 야타이
 스시</textarea>
-<button id="autoBtn" class="good">V7 대본 자동 구성</button>
+<button id="autoBtn" class="good">V8 대본 자동 구성</button>
 </section>
 
 <section class="card">
-<h2>3. 업로드 정보</h2>
+<h2>4. 업로드 정보</h2>
 <label>전체 대본</label><textarea id="script">후쿠오카 맛집 TOP5
 5위 하카타 라멘
 4위 모츠나베
@@ -82,7 +118,7 @@ video,audio{width:100%;border-radius:14px;margin-top:10px}.progress{height:9px;b
 </section>
 
 <section class="card">
-<h2>4. 영상 디자인</h2>
+<h2>5. 영상 디자인</h2>
 <div class="grid">
 <div><label>길이</label><select id="duration"><option value="15">15초</option><option value="20" selected>20초</option><option value="30">30초</option><option value="45">45초</option></select></div>
 <div><label>컷 효과</label><select id="motionMode"><option value="auto" selected>자동 랜덤</option><option value="zoomIn">줌인</option><option value="zoomOut">줌아웃</option><option value="pan">좌우 이동</option></select></div>
@@ -105,13 +141,13 @@ video,audio{width:100%;border-radius:14px;margin-top:10px}.progress{height:9px;b
 </section>
 
 <section class="card">
-<h2>5. 미리보기·썸네일</h2>
+<h2>6. 미리보기·썸네일</h2>
 <div class="preview"><canvas id="canvas" width="1080" height="1920"></canvas></div>
 <div class="actions" style="margin-top:10px"><button id="previewBtn" class="secondary">미리보기</button><button id="thumbnailBtn" class="secondary">썸네일 저장</button></div>
 </section>
 
 <section class="card sticky">
-<button id="renderBtn" class="primary">V7 쇼츠 만들기</button>
+<button id="renderBtn" class="primary">V8 쇼츠 만들기</button>
 <div class="progress"><div id="bar" class="bar"></div></div>
 <div id="status" class="status muted">사진을 선택하세요.</div>
 <video id="result" controls playsinline></video>
@@ -187,6 +223,49 @@ function renderThumbs(){
  const [left,del,right]=box.querySelectorAll("button");left.onclick=()=>{if(i>0){[items[i-1],items[i]]=[items[i],items[i-1]];renderThumbs()}};del.onclick=()=>{items.splice(i,1);renderThumbs()};right.onclick=()=>{if(i<items.length-1){[items[i+1],items[i]]=[items[i],items[i+1]];renderThumbs()}};$("thumbs").appendChild(box)
  });drawFrame(0,+$("duration").value)
 }
+
+const sourceDictionary={
+ "후쿠오카":["Fukuoka","福岡"],"도쿄":["Tokyo","東京"],"오사카":["Osaka","大阪"],"교토":["Kyoto","京都"],
+ "부산":["Busan","釜山"],"서울":["Seoul","ソウル"],"제주":["Jeju","済州"],
+ "맛집":["food restaurant ramen street food","グルメ レストラン ラーメン"],"여행":["travel attractions city","旅行 観光"],
+ "라멘":["ramen noodles","ラーメン"],"초밥":["sushi","寿司"],"스시":["sushi","寿司"],"야타이":["yatai street food","屋台"],
+ "편의점":["convenience store snacks","コンビニ"],"상품":["product lifestyle","商品"],"공포":["horror dark mystery","ホラー ミステリー"],
+ "카페":["cafe coffee dessert","カフェ コーヒー"],"호텔":["hotel room travel","ホテル"],"바다":["ocean beach","海 ビーチ"]
+};
+function makeSourceKeywords(topic){
+ let en=[],ja=[];
+ Object.entries(sourceDictionary).forEach(([ko,pair])=>{if(topic.includes(ko)){en.push(pair[0]);ja.push(pair[1])}});
+ const clean=topic.replace(/TOP\s*\d+/ig,"").replace(/[0-9]/g,"").trim();
+ if(!en.length)en.push(clean); if(!ja.length)ja.push(clean);
+ return {en:[...new Set(en)].join(" "),ja:[...new Set(ja)].join(" ")};
+}
+function renderKeywordChips(){
+ const chips=[...$("keywordEn").value.split(/\s+/),...$("keywordJa").value.split(/\s+/)].filter(Boolean).slice(0,12);
+ $("keywordChips").innerHTML="";
+ chips.forEach(k=>{const b=document.createElement("button");b.textContent=k;b.onclick=()=>navigator.clipboard.writeText(k);$("keywordChips").appendChild(b)})
+}
+$("keywordBtn").onclick=()=>{
+ const topic=$("sourceTopic").value.trim()||$("product").value.trim();
+ const k=makeSourceKeywords(topic);$("keywordEn").value=k.en;$("keywordJa").value=k.ja;renderKeywordChips()
+};
+["keywordEn","keywordJa"].forEach(id=>$(id).addEventListener("input",renderKeywordChips));
+document.querySelectorAll(".sourceLink").forEach(b=>b.onclick=()=>{
+ const en=$("keywordEn").value.trim()||$("sourceTopic").value.trim(),ja=$("keywordJa").value.trim(),q=encodeURIComponent(en),qJa=encodeURIComponent(ja||en);
+ const urls={
+  pexelsPhoto:`https://www.pexels.com/search/${q}/`,
+  pixabayPhoto:`https://pixabay.com/images/search/${q}/`,
+  unsplash:`https://unsplash.com/s/photos/${q}`,
+  pexelsVideo:`https://www.pexels.com/search/videos/${q}/`,
+  pixabayVideo:`https://pixabay.com/videos/search/${q}/`,
+  mixkit:`https://mixkit.co/free-stock-video/?q=${q}`,
+  googleImages:`https://www.google.com/search?tbm=isch&q=${qJa}`,
+  youtube:`https://www.youtube.com/results?search_query=${qJa}`,
+  googleWeb:`https://www.google.com/search?q=${qJa}`
+ };
+ window.open(urls[b.dataset.site],"_blank","noopener")
+});
+renderKeywordChips();
+
 $("images").onchange=async e=>{const arr=[];for(const f of [...e.target.files].slice(0,10)){const url=URL.createObjectURL(f),img=new Image();await new Promise((r,j)=>{img.onload=r;img.onerror=j;img.src=url});arr.push({url,img,file:f,caption:"",seconds:""})}items=arr;renderThumbs()};
 $("clearBtn").onclick=()=>{items=[];renderThumbs()};
 $("audio").onchange=e=>{if(audioURL)URL.revokeObjectURL(audioURL);audioURL=e.target.files[0]?URL.createObjectURL(e.target.files[0]):null};
@@ -204,13 +283,13 @@ $("copyTitle").onclick=async()=>{await navigator.clipboard.writeText($("title").
 $("copyMeta").onclick=async()=>{await navigator.clipboard.writeText($("description").value+"\n\n"+$("hashtags").value);alert("설명과 태그 복사 완료")};
 $("copyAllBtn").onclick=async()=>{await navigator.clipboard.writeText($("title").value+"\n\n"+$("description").value+"\n\n"+$("hashtags").value);alert("제목·설명·태그 복사 완료")};
 $("previewBtn").onclick=()=>{if(!items.length)return alert("사진을 먼저 선택하세요.");playing=false;if(raf)cancelAnimationFrame(raf);playing=true;const d=+$("duration").value,s=performance.now();const tick=n=>{if(!playing)return;const t=(n-s)/1000;drawFrame(Math.min(t,d-.001),d);if(t<d)raf=requestAnimationFrame(tick)};raf=requestAnimationFrame(tick)};
-$("thumbnailBtn").onclick=()=>{if(!items.length)return alert("사진을 먼저 선택하세요.");drawTitleCard($("title").value||$("product").value,1);canvas.toBlob(blob=>{const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="shorts_thumbnail_v7.png";a.click();URL.revokeObjectURL(a.href)},"image/png")};
+$("thumbnailBtn").onclick=()=>{if(!items.length)return alert("사진을 먼저 선택하세요.");drawTitleCard($("title").value||$("product").value,1);canvas.toBlob(blob=>{const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="shorts_thumbnail_v8.png";a.click();URL.revokeObjectURL(a.href)},"image/png")};
 ["duration","motionMode","transition","captionAnim","captionStyle","themeColor","captionPos","watermark","script","ctaText","endCard","introCard","stepDots","medalBadge","pulseOverlay","title"].forEach(id=>$(id).addEventListener("input",()=>drawFrame(0,+$("duration").value)));
 function bestMime(){return ["video/mp4;codecs=h264,aac","video/mp4","video/webm;codecs=vp9,opus","video/webm;codecs=vp8,opus","video/webm"].find(x=>window.MediaRecorder&&MediaRecorder.isTypeSupported(x))||""}
 $("renderBtn").onclick=async()=>{
  if(!items.length)return alert("사진을 먼저 선택하세요.");
  if(!window.MediaRecorder||!canvas.captureStream){$("status").textContent="현재 브라우저에서 영상 저장을 지원하지 않습니다. 안드로이드 Chrome 또는 PC Chrome에서 열어주세요.";return}
- $("bar").style.width="0%";$("status").textContent="V7 영상 생성 중… 화면을 끄지 마세요.";$("afterActions").style.display="none";
+ $("bar").style.width="0%";$("status").textContent="V8 영상 생성 중… 화면을 끄지 마세요.";$("afterActions").style.display="none";
  const d=+$("duration").value,stream=canvas.captureStream(30);let audio=null,aCtx=null;
  if(audioURL){audio=new Audio(audioURL);aCtx=new (window.AudioContext||window.webkitAudioContext)();const src=aCtx.createMediaElementSource(audio),gain=aCtx.createGain(),dest=aCtx.createMediaStreamDestination();gain.gain.value=+$("audioVolume").value/100;src.connect(gain);gain.connect(dest);gain.connect(aCtx.destination);dest.stream.getAudioTracks().forEach(t=>stream.addTrack(t))}
  const mime=bestMime();let rec;try{rec=new MediaRecorder(stream,mime?{mimeType:mime,videoBitsPerSecond:+$("quality").value}:undefined)}catch(e){rec=new MediaRecorder(stream)}
@@ -218,12 +297,12 @@ $("renderBtn").onclick=async()=>{
  if(audio){await aCtx.resume();audio.currentTime=0;audio.play().catch(()=>{})}
  const start=performance.now();await new Promise(resolve=>{function tick(now){const t=(now-start)/1000;drawFrame(Math.min(t,d-.001),d);$("bar").style.width=`${Math.min(100,t/d*100)}%`;if(t<d)requestAnimationFrame(tick);else resolve()}requestAnimationFrame(tick)});
  rec.stop();if(audio)audio.pause();await done;lastType=rec.mimeType||mime||"video/webm";lastBlob=new Blob(chunks,{type:lastType});const url=URL.createObjectURL(lastBlob);
- $("result").src=url;$("download").href=url;$("download").download=lastType.includes("mp4")?"shorts_v7_1080x1920.mp4":"shorts_v7_1080x1920.webm";$("afterActions").style.display="grid";$("bar").style.width="100%";$("status").textContent=`완성 ${(lastBlob.size/1024/1024).toFixed(1)}MB\nV7 · 1080×1920 · 30fps`;if(aCtx)aCtx.close()
+ $("result").src=url;$("download").href=url;$("download").download=lastType.includes("mp4")?"shorts_v8_1080x1920.mp4":"shorts_v8_1080x1920.webm";$("afterActions").style.display="grid";$("bar").style.width="100%";$("status").textContent=`완성 ${(lastBlob.size/1024/1024).toFixed(1)}MB\nV8 · 1080×1920 · 30fps`;if(aCtx)aCtx.close()
 };
-$("shareBtn").onclick=async()=>{if(!lastBlob)return alert("먼저 영상을 만드세요.");const ext=lastType.includes("mp4")?"mp4":"webm",file=new File([lastBlob],`shorts_v7.${ext}`,{type:lastType});if(navigator.canShare&&navigator.canShare({files:[file]})){try{await navigator.share({files:[file],title:$("title").value,text:$("description").value+"\n\n"+$("hashtags").value})}catch(e){}}else alert("영상 저장 후 YouTube 앱에서 업로드하세요.")};
+$("shareBtn").onclick=async()=>{if(!lastBlob)return alert("먼저 영상을 만드세요.");const ext=lastType.includes("mp4")?"mp4":"webm",file=new File([lastBlob],`shorts_v8.${ext}`,{type:lastType});if(navigator.canShare&&navigator.canShare({files:[file]})){try{await navigator.share({files:[file],title:$("title").value,text:$("description").value+"\n\n"+$("hashtags").value})}catch(e){}}else alert("영상 저장 후 YouTube 앱에서 업로드하세요.")};
 $("youtubeBtn").onclick=async()=>{await navigator.clipboard.writeText($("title").value+"\n\n"+$("description").value+"\n\n"+$("hashtags").value);window.open("https://www.youtube.com/upload","_blank")};
-$("saveProject").onclick=()=>{const d={template:currentTemplate,product:$("product").value,features:$("features").value,script:$("script").value,title:$("title").value,description:$("description").value,hashtags:$("hashtags").value,duration:$("duration").value,motionMode:$("motionMode").value,transition:$("transition").value,captionAnim:$("captionAnim").value,captionStyle:$("captionStyle").value,themeColor:$("themeColor").value,captionPos:$("captionPos").value,quality:$("quality").value,watermark:$("watermark").value,endCard:$("endCard").checked,introCard:$("introCard").checked,stepDots:$("stepDots").checked,medalBadge:$("medalBadge").checked,pulseOverlay:$("pulseOverlay").checked,ctaText:$("ctaText").value,audioVolume:$("audioVolume").value};localStorage.setItem("mobileShortsV7",JSON.stringify(d));alert("저장했습니다. 사진은 다시 선택해야 합니다.")};
-const saved=localStorage.getItem("mobileShortsV7");if(saved){try{const d=JSON.parse(saved);currentTemplate=d.template||"foodTop5";document.querySelectorAll("[data-template]").forEach(x=>x.classList.toggle("active",x.dataset.template===currentTemplate));Object.entries(d).forEach(([k,v])=>{if($(k)){if($(k).type==="checkbox")$(k).checked=v;else $(k).value=v}});$("volumeOut").value=$("audioVolume").value+"%"}catch(e){}}
+$("saveProject").onclick=()=>{const d={sourceTopic:$("sourceTopic").value,keywordEn:$("keywordEn").value,keywordJa:$("keywordJa").value,template:currentTemplate,product:$("product").value,features:$("features").value,script:$("script").value,title:$("title").value,description:$("description").value,hashtags:$("hashtags").value,duration:$("duration").value,motionMode:$("motionMode").value,transition:$("transition").value,captionAnim:$("captionAnim").value,captionStyle:$("captionStyle").value,themeColor:$("themeColor").value,captionPos:$("captionPos").value,quality:$("quality").value,watermark:$("watermark").value,endCard:$("endCard").checked,introCard:$("introCard").checked,stepDots:$("stepDots").checked,medalBadge:$("medalBadge").checked,pulseOverlay:$("pulseOverlay").checked,ctaText:$("ctaText").value,audioVolume:$("audioVolume").value};localStorage.setItem("mobileShortsV8",JSON.stringify(d));alert("저장했습니다. 사진은 다시 선택해야 합니다.")};
+const saved=localStorage.getItem("mobileShortsV8");if(saved){try{const d=JSON.parse(saved);currentTemplate=d.template||"foodTop5";document.querySelectorAll("[data-template]").forEach(x=>x.classList.toggle("active",x.dataset.template===currentTemplate));Object.entries(d).forEach(([k,v])=>{if($(k)){if($(k).type==="checkbox")$(k).checked=v;else $(k).value=v}});$("volumeOut").value=$("audioVolume").value+"%";renderKeywordChips()}catch(e){}}
 if("serviceWorker" in navigator)navigator.serviceWorker.register("./sw.js").catch(()=>{});
 drawFrame(0,20);
 </script>
